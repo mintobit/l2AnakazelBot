@@ -1,0 +1,7 @@
+WinWaitActive("[CLASS:l2UnrealWWindowsViewportWindow]")
+$main = WinGetHandle("[CLASS:l2UnrealWWindowsViewportWindow]")
+WinActivate("Program Manager")
+WinWaitActive("[CLASS:l2UnrealWWindowsViewportWindow]")
+$support = WinGetHandle("[CLASS:l2UnrealWWindowsViewportWindow]")
+ControlSend($main, "", "", "Main")
+ControlSend($support, "", "", "Support")
