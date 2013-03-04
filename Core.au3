@@ -1,9 +1,15 @@
+#comments-start
+ShortDesc	Run main loop
+#comments-end
 Func _Main()
    While True
 	  Sleep(10)
    WEnd
 EndFunc
 
+#comments-start
+ShortDesc	Switch between game windows
+#comments-end
 Func WinSwitch()
    If WinActive($main) = 0 Then
 	  Command("target", "%party1")
@@ -18,7 +24,10 @@ Func WinSwitch()
    EndIf
    Sleep(2000)
 EndFunc
-   
+
+#comments-start
+ShortDesc	Set target to $targetName
+#comments-end
 Func SetTarget($targetName)
    CancelTarget()
    Command("target", $targetName)
@@ -26,6 +35,9 @@ Func SetTarget($targetName)
    Sleep(500)
 EndFunc
 
+#comments-start
+ShortDesc	Restore previous target
+#comments-end
 Func RestoreTarget()
    If $prevTarget = "" Then
 	  Return False
@@ -35,11 +47,17 @@ Func RestoreTarget()
    Sleep(300)
 EndFunc
 
+#comments-start
+ShortDesc	Cancel current target
+#comments-end
 Func CancelTarget()
    Send("{ESCAPE}")
    Sleep(200)
 EndFunc
 
+#comments-start
+ShortDesc	Check if traget exists
+#comments-end
 Func TargetExists()
    $result = _ImageSearch("img/targetwin.bmp", 0, $x, $y, 0)
    if $result = 1 Then
@@ -49,6 +67,9 @@ Func TargetExists()
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Go to $NPCName and open the dialog window
+#comments-end
 Func GoToNPC($NPCName)
    CancelTarget()
    While TargetExists() = False
@@ -65,6 +86,9 @@ Func GoToNPC($NPCName)
    WEnd
 EndFunc
 
+#comments-start
+ShortDesc	Check if NPC dialog window is open
+#comments-end
 Func NPCWindowExists()
    $result = _ImageSearch("img/npcwin.bmp", 0, $x, $y, 0)
    If $result = 1 Then
@@ -74,6 +98,9 @@ Func NPCWindowExists()
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Perform game action
+#comments-end
 Func Command($action, $option=False)
    If $option Then
 	  Send("{ENTER}/" & $action & " " & $option & "{ENTER}")
@@ -82,6 +109,9 @@ Func Command($action, $option=False)
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Click the menu entry (defined by array of images)
+#comments-end
 Func MenuSelect($menuEntry)
    $Entries[0] = "img/iwanttogototheinnerspaceoftherift.bmp"
    $Entries[1] = "img/usechancecard.bmp"
@@ -92,12 +122,18 @@ Func MenuSelect($menuEntry)
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Receive lineage2 window coordinates and assign them to $x/yClient accordingly
+#comments-end
 Func GetClientCoords()
    $pos = WinGetPos("")
    $xClient = $pos[0]
    $yClient = $pos[1]
 EndFunc
 
+#comments-start
+ShortDesc	Click three window points $x/yP1,$x/yP2,$x/yP3
+#comments-end
 Func ByPass($xP1, $yP1, $xP2, $yP2, $xP3, $yP3, $delay)
    MouseMove($xP1, $yP1, 0)
    MouseClick("left")
@@ -110,6 +146,9 @@ Func ByPass($xP1, $yP1, $xP2, $yP2, $xP3, $yP3, $delay)
    Sleep($delay)
 EndFunc
 
+#comments-start
+ShortDesc	Run obstacle bypass procedure
+#comments-end
 Func BypassObstacle()
    $random = Random(1, 8, 1)
    Switch $random
@@ -132,12 +171,18 @@ Func BypassObstacle()
    EndSwitch
 EndFunc
 
+#comments-start
+ShortDesc	Receive active window dimentions and pass them to $width and $height accordingly
+#comments-end
 Func GetClientDimention()
    $dim = WinGetClientSize("[ACTIVE]")
    $width = $dim[0]
    $height = $dim[1]
 EndFunc
 
+#comments-start
+ShortDesc	Check if character is moving
+#comments-end
 Func IsMoving()
    $exMP1 = PixelGetColor($xMP1, $yMP1)
    $exMP2 = PixelGetColor($xMP2, $yMP2)
@@ -157,6 +202,9 @@ Func IsMoving()
    EndIf   
 EndFunc
 
+#comments-start
+ShortDesc	Check if there is a dialog box with "no dimentional fragments" message
+#comments-end
 Func NoDMWindowExists()
    $result = _ImageSearch("img/nodm.bmp", 0, $x, $y, 50)
    If $result = 1 Then
@@ -166,6 +214,9 @@ Func NoDMWindowExists()
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Run fighting procedure
+#comments-end
 Func Fight($targetName)
    Send("{F3}")
    Send($supportToggle)
@@ -185,6 +236,9 @@ Func Fight($targetName)
    Send($supportToggle)
 EndFunc
 
+#comments-start
+ShortDesc	Check if target has HP
+#comments-end
 Func HasHP()
    If TargetExists() = False Then
 	  RestoreTarget()
@@ -196,6 +250,9 @@ Func HasHP()
    EndIf
 EndFunc
 
+#comments-start
+ShortDesc	Pick up dropped items
+#comments-end
 Func ManageDrop()
    For $i = 0 To 12 Step +1
 	  Command("pickup")
@@ -203,6 +260,9 @@ Func ManageDrop()
    Next
 EndFunc
 
+#comments-start
+ShortDesc	Close
+#comments-end
 Func _Exit()
    Exit
 EndFunc
