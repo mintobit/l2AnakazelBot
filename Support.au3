@@ -1,5 +1,6 @@
 #Include  <Crypt.au3>
 #Include  <WinAPI.au3>
+#Include <Core.au3>
 
 AutoItSetOption("TrayMenuMode", 1)
 HotKeySet("{NUMPADADD}", "ToggleSupport")
@@ -20,30 +21,3 @@ $Prayerkey = "{F4}"
 Local $isPaused = True
 
 _Main()
-
-Func SupportSend($key)
-   ControlSend($support, "", "", $key)
-EndFunc
-
-Func _Main()
-   While True
-	  Sleep(10)
-   WEnd
-EndFunc
-
-Func ToggleSupport()
-   $isPaused = Not $isPaused
-   SupportSend($Prayerkey)
-   While $isPaused = False
-	  SupportSend($Healkey)
-	  SupportSend($Healkey)
-	  SupportSend($Healkey)
-	  SupportSend($ManaBurnkey)
-	  Sleep(1000)
-	  SupportSend($MPkey)
-   Wend
-EndFunc
-
-Func _Exit()
-   Exit
-EndFunc
