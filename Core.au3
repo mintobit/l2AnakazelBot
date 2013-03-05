@@ -261,6 +261,29 @@ Func ManageDrop()
 EndFunc
 
 #comments-start
+ShortDesc	Send keypress to support window
+#comments-end
+Func SupportSend($key)
+   ControlSend($support, "", "", $key)
+EndFunc
+
+#comments-start
+ShortDesc	Toggle support procedure
+#comments-end
+Func ToggleSupport()
+   $isPaused = Not $isPaused
+   SupportSend($Prayerkey)
+   While $isPaused = False
+	  SupportSend($Healkey)
+	  SupportSend($Healkey)
+	  SupportSend($Healkey)
+	  SupportSend($ManaBurnkey)
+	  Sleep(1000)
+	  SupportSend($MPkey)
+   Wend
+EndFunc
+
+#comments-start
 ShortDesc	Close
 #comments-end
 Func _Exit()
