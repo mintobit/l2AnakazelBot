@@ -8,6 +8,13 @@ Func _Main()
 EndFunc
 
 #comments-start
+ShortDesc	Initialize application
+#comments-end
+Func init()
+   ;Hotkey setup via ToolTips
+EndFunc
+   
+#comments-start
 ShortDesc	Switch between game windows
 #comments-end
 Func WinSwitch()
